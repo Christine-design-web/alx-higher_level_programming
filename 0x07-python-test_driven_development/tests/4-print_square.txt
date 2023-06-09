@@ -1,30 +1,53 @@
-import unittest
+==================================
+The ``4-print_square.txt`` module
+==================================
 
-class TestSayMyName(unittest.TestCase):
-    def test_say_my_name(self):
-        # Test with both first name and last name
-        expected_output = "My name is John Doe"
-        self.assertOutputEquals("John", "Doe", expected_output)
+Using ``print_square``
+-----------------------
 
-        # Test with only first name
-        expected_output = "My name is Alice "
-        self.assertOutputEquals("Alice", "", expected_output)
+Import the function:
 
-        # Test with invalid input (non-string)
-        self.assertRaises(TypeError, self.assertOutputEquals, 123, "Smith")
+    >>> print_square = __import__('4-print_square').print_square
 
-    def assertOutputEquals(self, first_name, last_name, expected_output):
-        # Capture the output using context manager
-        with self.assertLogs(level="INFO") as cm:
-            # Call the function
-            say_my_name(first_name, last_name)
-        
-        # Extract the actual output from the logs
-        actual_output = cm.output[0]
-        
-        # Assert the actual output matches the expected output
-        self.assertEqual(actual_output, expected_output)
+Now test it:
 
-if __name__ == "__main__":
-    unittest.main()
+    >>> print_square(4)
+    ####
+    ####
+    ####
+    ####
 
+    >>> print_square(10)
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+
+    >>> print_square(0)
+
+
+    >>> print_square("Hello")
+    Traceback (most recent call last):
+    TypeError: size must be an integer
+
+    >>> print_square(5.7)
+    Traceback (most recent call last):
+    TypeError: size must be an integer
+
+    >>> print_square(-2)
+    Traceback (most recent call last):
+    ValueError: size must be >= 0
+
+    >>> print_square(-3.0)
+    Traceback (most recent call last):
+    TypeError: size must be an integer
+
+    >>> print_square()
+    Traceback (most recent call last):
+    TypeError: print_square() missing 1 required positional argument: 'size'
